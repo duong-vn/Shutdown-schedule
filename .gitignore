@@ -16,3 +16,6 @@
 # Publish output
 publish/
 artifacts/
+
+# Local agent caches
+.claude/
