@@ -8,36 +8,44 @@ namespace ShutdownScheduler;
 internal sealed class MainForm : Form
 {
     // ==========================================
-    // THEME PALETTE: MINIMAL SOFT DARK (SLATE / ZINC)
+    // THEME PALETTE: SOLID FLUENT DARK STUDIO (CYAN OCEAN BLUE)
     // ==========================================
-    private static readonly Color AppBackground = Color.FromArgb(15, 17, 23);          // #0F1117 Deep Neutral Canvas
-    private static readonly Color CardBackground = Color.FromArgb(22, 26, 36);         // #161A24 Elevated Surface
-    private static readonly Color CardHoverBackground = Color.FromArgb(28, 34, 48);    // #1C2230 Hover Surface
-    private static readonly Color CardActiveBackground = Color.FromArgb(26, 42, 70);   // #1A2A46 Selected Surface
-    private static readonly Color CardBorder = Color.FromArgb(38, 44, 60);             // #262C3C Soft Border
-    private static readonly Color CardBorderHover = Color.FromArgb(56, 66, 92);       // #38425C Hover Border
-    private static readonly Color CardBorderActive = Color.FromArgb(59, 130, 246);     // #3B82F6 Active Accent Border
-    private static readonly Color InputBackground = Color.FromArgb(17, 20, 28);        // #11141C Recessed Input
+    private static readonly Color AppBackground = Color.FromArgb(13, 17, 26);          // #0D111A Deep Obsidian Navy
+    private static readonly Color CardBackground = Color.FromArgb(22, 31, 48);         // #161F30 Elevated Slate Navy
+    private static readonly Color CardHoverBackground = Color.FromArgb(30, 42, 66);    // #1E2A42 Hover Slate Navy
+    private static readonly Color CardActiveBackground = Color.FromArgb(24, 52, 90);   // #18345A Active Slate Navy
+    private static readonly Color CardBorder = Color.FromArgb(38, 52, 78);             // #26344E Subtle Navy Border
+    private static readonly Color CardBorderHover = Color.FromArgb(60, 82, 118);       // #3C5276 Hover Border
+    private static readonly Color CardBorderActive = Color.FromArgb(56, 189, 248);     // #38BDF8 Active Cyan Border
+    private static readonly Color InputBackground = Color.FromArgb(16, 23, 36);        // #101724 Dark Recessed Input
 
     private static readonly Color TextPrimary = Color.FromArgb(248, 250, 252);         // #F8FAFC Crisp Pure
-    private static readonly Color TextSecondary = Color.FromArgb(148, 163, 184);       // #94A3B8 Balanced Grey
-    private static readonly Color TextMuted = Color.FromArgb(100, 116, 139);           // #64748B Subtle Muted
+    private static readonly Color TextSecondary = Color.FromArgb(148, 163, 184);       // #94A3B8 Cool Grey
+    private static readonly Color TextMuted = Color.FromArgb(100, 116, 139);           // #64748B Slate Muted
 
-    private static readonly Color AccentPrimary = Color.FromArgb(59, 130, 246);        // #3B82F6 Vibrant Soft Blue
-    private static readonly Color AccentPrimaryHover = Color.FromArgb(96, 165, 250);   // #60A5FA Blue Hover
-    private static readonly Color AccentPrimaryDark = Color.FromArgb(37, 99, 235);     // #2563EB Blue Pressed
-    private static readonly Color AccentPrimaryBg = Color.FromArgb(24, 36, 60);        // #18243C Soft Accent Badge
+    // Signature Accent: Vibrant Cyan Ocean Blue (#38BDF8)
+    private static readonly Color AccentCyan = Color.FromArgb(56, 189, 248);           // #38BDF8 Sky Blue / Cyan
+    private static readonly Color AccentCyanHover = Color.FromArgb(125, 211, 252);      // #7DD3FC Cyan Hover
+    private static readonly Color AccentCyanDark = Color.FromArgb(14, 165, 233);        // #0EA5E9 Ocean Blue
+    private static readonly Color BadgeCyanBg = Color.FromArgb(20, 48, 72);            // #143048 Translucent Navy Badge
 
+    private static readonly Color AccentPrimary = AccentCyan;
+    private static readonly Color AccentPrimaryHover = AccentCyanHover;
+    private static readonly Color AccentPrimaryDark = AccentCyanDark;
+    private static readonly Color AccentPrimaryBg = BadgeCyanBg;
+
+    private static readonly Color AccentPurple = Color.FromArgb(129, 140, 248);        // #818CF8 Soft Violet
     private static readonly Color AccentEmerald = Color.FromArgb(16, 185, 129);        // #10B981 Emerald Green
-    private static readonly Color AccentEmeraldBg = Color.FromArgb(18, 44, 34);        // Emerald Badge Bg
+    private static readonly Color AccentEmeraldBg = Color.FromArgb(18, 48, 40);        // Emerald Badge Bg
+    private static readonly Color AccentAmber = Color.FromArgb(245, 158, 11);          // #F59E0B Amber
 
     private static readonly Color AccentRed = Color.FromArgb(239, 68, 68);             // #EF4444 Crimson
     private static readonly Color AccentRedHover = Color.FromArgb(248, 113, 113);      // #F87171 Crimson Hover
     private static readonly Color AccentRedDark = Color.FromArgb(220, 38, 38);         // #DC2626 Deep Red
-    private static readonly Color AccentRedBg = Color.FromArgb(44, 22, 28);            // Red Badge Bg
+    private static readonly Color AccentRedBg = Color.FromArgb(48, 22, 30);            // Red Badge Bg
 
-    private static readonly Color ChipNormalBg = Color.FromArgb(24, 29, 40);
-    private static readonly Color ChipNormalHover = Color.FromArgb(34, 42, 58);
+    private static readonly Color ChipNormalBg = Color.FromArgb(28, 38, 58);
+    private static readonly Color ChipNormalHover = Color.FromArgb(38, 52, 78);
 
     private static readonly CultureInfo VietnameseCulture = CultureInfo.GetCultureInfo("vi-VN");
 
@@ -49,7 +57,7 @@ internal sealed class MainForm : Form
     private readonly Panel countdownPanel = new();
 
     // Scheduling View Controls
-    private readonly PillBadge liveClockBadge = new("● --:--:--", TextSecondary, CardBackground);
+    private readonly PillBadge liveClockBadge = new("● --:--:--", AccentCyan, BadgeCyanBg);
     private readonly Label scheduledForLabel = new();
     private readonly Label durationSummaryLabel = new();
     private readonly Label scheduleStatusLabel = new();
@@ -262,6 +270,7 @@ internal sealed class MainForm : Form
             BackColor = CardBackground,
             BorderColor = CardBorder,
             CornerRadius = 12,
+            TopAccentColor = AccentPurple,
             Margin = new Padding(0, 0, 6, 0)
         };
 
@@ -358,6 +367,7 @@ internal sealed class MainForm : Form
             BackColor = CardBackground,
             BorderColor = CardBorder,
             CornerRadius = 12,
+            TopAccentColor = AccentCyan,
             Margin = new Padding(6, 0, 0, 0)
         };
 
@@ -729,7 +739,7 @@ internal sealed class MainForm : Form
         // Subtitle
         countdownScheduledForLabel.AutoSize = true;
         countdownScheduledForLabel.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-        countdownScheduledForLabel.ForeColor = TextSecondary;
+        countdownScheduledForLabel.ForeColor = AccentCyan;
         countdownScheduledForLabel.TextAlign = ContentAlignment.MiddleCenter;
         countdownScheduledForLabel.Dock = DockStyle.Fill;
 
@@ -761,9 +771,9 @@ internal sealed class MainForm : Form
         statsGrid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33f));
         statsGrid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33f));
 
-        statsGrid.Controls.Add(CreateStatCard("BẮT ĐẦU LÚC", statStartTimeLabel), 0, 0);
-        statsGrid.Controls.Add(CreateStatCard("DỰ KIẾN TẮT", statTargetTimeLabel), 1, 0);
-        statsGrid.Controls.Add(CreateStatCard("ĐÃ TRÔI QUA", statElapsedLabel), 2, 0);
+        statsGrid.Controls.Add(CreateStatCard("BẮT ĐẦU LÚC", statStartTimeLabel, AccentPurple), 0, 0);
+        statsGrid.Controls.Add(CreateStatCard("DỰ KIẾN TẮT", statTargetTimeLabel, AccentCyan), 1, 0);
+        statsGrid.Controls.Add(CreateStatCard("ĐÃ TRÔI QUA", statElapsedLabel, AccentEmerald), 2, 0);
 
         // Action Buttons
         cancelButton.Text = "Hủy lịch tắt máy";
@@ -815,7 +825,7 @@ internal sealed class MainForm : Form
         countdownPanel.Controls.Add(outerContainer);
     }
 
-    private static Control CreateStatCard(string caption, Label valueLabel)
+    private static Control CreateStatCard(string caption, Label valueLabel, Color accent)
     {
         var card = new CardPanel
         {
@@ -839,7 +849,7 @@ internal sealed class MainForm : Form
         {
             Text = caption,
             Font = new Font("Segoe UI", 7F, FontStyle.Bold),
-            ForeColor = TextMuted,
+            ForeColor = accent,
             AutoSize = true,
             Margin = new Padding(0, 0, 0, 2)
         };
@@ -1600,6 +1610,7 @@ internal sealed class MainForm : Form
     {
         public int CornerRadius { get; set; } = 12;
         public Color BorderColor { get; set; } = CardBorder;
+        public Color TopAccentColor { get; set; } = Color.Transparent;
 
         public CardPanel()
         {
@@ -1617,6 +1628,18 @@ internal sealed class MainForm : Form
             using var path = CreateRoundedPath(bounds, CornerRadius);
 
             using (var brush = new SolidBrush(BackColor)) g.FillPath(brush, path);
+
+            if (TopAccentColor != Color.Transparent)
+            {
+                var oldClip = g.Clip;
+                g.SetClip(path);
+                using (var accentBrush = new SolidBrush(TopAccentColor))
+                {
+                    g.FillRectangle(accentBrush, bounds.X, bounds.Y, bounds.Width, 3.5f);
+                }
+                g.Clip = oldClip;
+            }
+
             using (var pen = new Pen(BorderColor, 1f)) g.DrawPath(pen, path);
         }
 
@@ -1921,7 +1944,7 @@ internal sealed class MainForm : Form
             var bounds = new Rectangle((ClientSize.Width - size) / 2, (ClientSize.Height - size) / 2, size, size);
 
             // Subtle Outer Track (Unbroken full circle)
-            using (var trackPen = new Pen(Color.FromArgb(28, 34, 48), 8F))
+            using (var trackPen = new Pen(Color.FromArgb(24, 38, 62), 8F))
             {
                 g.DrawArc(trackPen, bounds, -90, 360);
             }
